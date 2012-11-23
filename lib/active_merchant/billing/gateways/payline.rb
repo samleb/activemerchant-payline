@@ -22,6 +22,7 @@ module ActiveMerchant
       OBJ_NAMESPACE = 'http://obj.ws.payline.experian.com'.freeze
       
       DATE_FORMAT = "%d/%m/%Y %H:%M".freeze
+      EXPIRATION_DATE_FORMAT = "%.2d%.2d".freeze
       
       SUCCESS_CODE = '00000'.freeze
 
@@ -116,9 +117,13 @@ module ActiveMerchant
           xml.card do
             xml.obj :number, card.number
             xml.obj :type, 'CB' # FIXME
-            xml.obj :expirationDate, card.expiry_date.expiration.strftime("%m%y")
+            xml.obj :expirationDate, expiration_date(card.month, card.year)
             xml.obj :cvx, card.verification_value
           end
+        end
+        
+        def expiration_date(month, year)
+          EXPIRATION_DATE_FORMAT % [month, year.to_s[-2..-1]]
         end
         
         def add_order(xml, money, currency, options)
