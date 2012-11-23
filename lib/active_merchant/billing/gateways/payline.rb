@@ -38,6 +38,16 @@ module ActiveMerchant
         :recurrent    => 'REC'
       }.freeze
       
+      CARD_BRAND_CODES = Hash.new('CB').update(
+        'visa'             => 'VISA',
+        'master'           => 'MASTERCARD',
+        'american_express' => 'AMEX',
+        'diners_club'      => 'DINERS',
+        'jcb'              => 'JCB',
+        'switch'           => 'SWITCH',
+        'maestro'          => 'MAESTRO'
+      ).freeze
+      
       def initialize(options = {})
         requires!(options, :merchant_id, :merchant_access_key, :contract_number)
         @options = options
@@ -116,7 +126,7 @@ module ActiveMerchant
         def add_credit_card(xml, card)
           xml.card do
             xml.obj :number, card.number
-            xml.obj :type, 'CB' # FIXME
+            xml.obj :type, CARD_BRAND_CODES[card.brand]
             xml.obj :expirationDate, expiration_date(card.month, card.year)
             xml.obj :cvx, card.verification_value
           end
