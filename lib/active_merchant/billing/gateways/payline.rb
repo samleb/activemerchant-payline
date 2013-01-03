@@ -21,6 +21,8 @@ module ActiveMerchant
       IMPL_NAMESPACE = 'http://impl.ws.payline.experian.com'.freeze
       OBJ_NAMESPACE = 'http://obj.ws.payline.experian.com'.freeze
       
+      LOG_FILTERED_TAGS = %w( number cvx ).freeze
+      
       DATE_FORMAT = "%d/%m/%Y %H:%M".freeze
       EXPIRATION_DATE_FORMAT = "%.2d%.2d".freeze
       
@@ -97,11 +99,19 @@ module ActiveMerchant
         def savon_client
           @savon_client ||= Savon.client do
             config.raise_errors = false
-            config.logger = self.logger
-            config.logger.filter << "number" << "cvx"
+            configure_logger(config)
             wsdl.namespace = IMPL_NAMESPACE
             wsdl.endpoint = test? ? test_url : live_url
             http.headers["Authorization"] = basic_authentication_header
+          end
+        end
+
+        def configure_logger(config)
+          if logger
+            config.logger = logger
+            config.logger.filter.push(*LOG_FILTERED_TAGS)
+          else
+            config.log = false
           end
         end
 
