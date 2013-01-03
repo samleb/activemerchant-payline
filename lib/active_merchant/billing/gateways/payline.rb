@@ -97,6 +97,8 @@ module ActiveMerchant
         def savon_client
           @savon_client ||= Savon.client do
             config.raise_errors = false
+            config.logger = self.logger
+            config.logger.filter << "number" << "cvx"
             wsdl.namespace = IMPL_NAMESPACE
             wsdl.endpoint = test? ? test_url : live_url
             http.headers["Authorization"] = basic_authentication_header
