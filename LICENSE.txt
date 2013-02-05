@@ -1,4 +1,4 @@
-Copyright (c) 2012 Goldmund International
+Copyright (c) 2012-2013 Goldmund International, Kareea SARL, Samuel Lebeau
 
 MIT License
 
