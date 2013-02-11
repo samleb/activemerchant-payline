@@ -32,6 +32,14 @@ module ActiveMerchant
       end
       alias_method :capture, :do_capture
       
+      def do_reset(authorization, options = {})
+        direct_api_request :do_reset do |xml|
+          add_version(xml)
+          xml.transactionID authorization
+        end
+      end
+      alias_method :void, :do_reset
+      
       def do_recurrent_wallet_payment(money, wallet_id, options = {})
         currency = currency_code(options[:currency])
         direct_api_request :do_recurrent_wallet_payment do |xml|
