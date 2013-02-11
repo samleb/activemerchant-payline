@@ -4,10 +4,10 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |gem|
   gem.name          = "activemerchant-payline"
-  gem.version       = "0.0.1"
+  gem.version       = "0.0.1.alpha1"
   gem.authors       = ["Samuel Lebeau"]
   gem.email         = ["samuel.lebeau@gmail.com"]
-  gem.summary       = %q{ActiveMerchant Gateway for Payline DirectPayment API}
+  gem.summary       = %q{Partial ActiveMerchant implementation of the Payline Gateway.}
   gem.homepage      = "https://github.com/Goldmund/activemerchant-payline"
 
   gem.files         = `git ls-files`.split($/)
