@@ -35,7 +35,6 @@ module ActiveMerchant
       end
     end
     
-    # Backwards-compatibility with 0.0.1
-    Payline = PaylineGateway
+    Payline = ActiveSupport::Deprecation::DeprecatedConstantProxy.new('ActiveMerchant::Billing::Payline', PaylineGateway)
   end
 end
