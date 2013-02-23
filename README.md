@@ -34,6 +34,7 @@ A beta release will be considered when this list is complete:
 
 * Add support for missing Direct Payment API methods
 * Add support for missing Web Payment API methods
+* Handle timezones properly (Payline probably uses CET)
 * Implement unit tests
 * Implement remote tests using [Payline Homologation] [2]
 

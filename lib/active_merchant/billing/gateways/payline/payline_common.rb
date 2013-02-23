@@ -11,7 +11,8 @@ module ActiveMerchant
       
       LOG_FILTERED_TAGS = %w( number cvx ).freeze
       
-      DATE_FORMAT = "%d/%m/%Y %H:%M".freeze
+      DATE_FORMAT = "%d/%m/%Y".freeze
+      DATETIME_FORMAT = "#{DATE_FORMAT} %H:%M".freeze
       
       SUCCESS_MESSAGES = {
         # Card & Check
@@ -144,7 +145,7 @@ module ActiveMerchant
         end
       
         def format_date(time)
-          time.strftime(DATE_FORMAT)
+          time.strftime(DATETIME_FORMAT)
         end
         
         def format_boolean(boolean, default = false)
