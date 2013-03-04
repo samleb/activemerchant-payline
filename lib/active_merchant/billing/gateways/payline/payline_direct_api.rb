@@ -59,7 +59,7 @@ module ActiveMerchant
       def get_recurrent_payment_responses(payment_record_id)
         response = get_payment_record(payment_record_id)
         responses = response.params[:billing_record_list][:billing_record]
-        responses.collect { |r| build_response(r) if r[:result] }.compact
+        Array.wrap(responses).collect { |r| build_response(r) if r[:result] }.compact
       end
       
       def get_payment_record(payment_record_id)
